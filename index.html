@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mari 💛</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+body{
+  background:#030305;
+  color:white;
+  font-family:Georgia, "Times New Roman", serif;
+}
+
+/* FONDO */
+.scene{
+  position:relative;
+  width:100%;
+  height:100vh;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 50%, #332500 0%, #100d03 25%, #030305 65%);
+}
+
+/* BRILLO CENTRAL */
+.glow{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:450px;
+  height:450px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#ffd21c;
+  opacity:.09;
+  filter:blur(70px);
+  animation:pulse 4s infinite alternate;
+}
+
+@keyframes pulse{
+  from{transform:translate(-50%,-50%) scale(.8);opacity:.06}
+  to{transform:translate(-50%,-50%) scale(1.15);opacity:.13}
+}
+
+/* CANVAS */
+#particles{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+/* TITULO */
+.title{
+  position:absolute;
+  top:7%;
+  width:100%;
+  text-align:center;
+  z-index:5;
+}
+
+.title small{
+  display:block;
+  color:#d9b62c;
+  letter-spacing:5px;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.title h1{
+  font-size:clamp(40px,8vw,85px);
+  font-weight:normal;
+  color:#fff5bd;
+  text-shadow:
+    0 0 10px #ffd21c,
+    0 0 30px #dcae00,
+    0 0 60px #8d6a00;
+}
+
+.title p{
+  margin-top:10px;
+  color:#d8cfae;
+  letter-spacing:4px;
+  font-size:13px;
+}
+
+/* FLORES */
+.flower{
+  position:absolute;
+  z-index:4;
+  font-size:70px;
+  filter:
+    drop-shadow(0 0 8px #ffd21c)
+    drop-shadow(0 0 22px #b88b00);
+  animation:float 5s ease-in-out infinite;
+}
+
+.f1{left:5%;bottom:12%;animation-delay:0s}
+.f2{left:14%;top:24%;font-size:48px;animation-delay:1s}
+.f3{right:6%;bottom:10%;animation-delay:1.5s}
+.f4{right:14%;top:23%;font-size:52px;animation-delay:2s}
+.f5{left:27%;bottom:8%;font-size:40px;animation-delay:2.5s}
+.f6{right:27%;bottom:7%;font-size:42px;animation-delay:.8s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-18px) rotate(4deg)}
+}
+
+/* CORAZON */
+.heart{
+  position:absolute;
+  left:50%;
+  top:52%;
+  width:230px;
+  height:210px;
+  transform:translate(-50%,-50%) rotate(-45deg);
+  z-index:3;
+  animation:heartGlow 2.5s infinite alternate;
+}
+
+.heart:before,
+.heart:after{
+  content:"";
+  position:absolute;
+  width:230px;
+  height:230px;
+  border-radius:50%;
+  background:#ffd21c;
+  box-shadow:
+    0 0 15px #ffd21c,
+    0 0 40px #e0a900,
+    0 0 80px #9a7100;
+}
+
+.heart:before{
+  top:-115px;
+  left:0;
+}
+
+.heart:after{
+  left:115px;
+  top:0;
+}
+
+.heart-core{
+  position:absolute;
+  width:230px;
+  height:230px;
+  background:#ffd21c;
+  z-index:2;
+  box-shadow:
+    0 0 20px #ffd21c,
+    0 0 55px #dca900;
+}
+
+@keyframes heartGlow{
+  from{filter:brightness(.8)}
+  to{filter:brightness(1.3)}
+}
+
+/* BOTON */
+.button{
+  position:absolute;
+  z-index:8;
+  bottom:9%;
+  left:50%;
+  transform:translateX(-50%);
+  padding:15px 28px;
+  border:1px solid #d7b52d;
+  border-radius:30px;
+  background:rgba(20,17,5,.75);
+  color:#ffe98a;
+  letter-spacing:3px;
+  font-size:12px;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 0 20px rgba(255,210,28,.12);
+}
+
+.button:hover{
+  background:#ffd21c;
+  color:#171300;
+  box-shadow:0 0 35px #ffd21c;
+  transform:translateX(-50%) scale(1.05);
+}
+
+/* MODAL */
+.modal{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(8px);
+  padding:20px;
+}
+
+.card{
+  width:min(600px,92%);
+  padding:45px 35px;
+  text-align:center;
+  border:1px solid rgba(255,210,28,.5);
+  background:
+    radial-gradient(circle at center,#211a05,#080805 70%);
+  border-radius:20px;
+  box-shadow:
+    0 0 30px rgba(255,210,28,.2),
+    0 0 100px rgba(255,210,28,.08);
+  animation:appear .7s ease;
+}
+
+@keyframes appear{
+  from{opacity:0;transform:scale(.8)}
+  to{opacity:1;transform:scale(1)}
+}
+
+.card .flower-top{
+  font-size:55px;
+  margin-bottom:15px;
+}
+
+.card h2{
+  color:#ffe47a;
+  font-size:35px;
+  font-weight:normal;
+  margin-bottom:25px;
+  text-shadow:0 0 20px #c99b00;
+}
+
+.card p{
+  color:#eee7cf;
+  line-height:1.8;
+  font-size:16px;
+}
+
+.close{
+  margin-top:28px;
+  background:none;
+  color:#c9b55f;
+  border:1px solid #6e5d20;
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .heart{
+    width:150px;
+    height:140px;
+  }
+
+  .heart:before,
+  .heart:after,
+  .heart-core{
+    width:150px;
+    height:150px;
+  }
+
+  .heart:before{
+    top:-75px;
+  }
+
+  .heart:after{
+    left:75px;
+  }
+
+  .flower{
+    font-size:48px;
+  }
+
+  .title{
+    top:9%;
+  }
+
+  .title p{
+    font-size:10px;
+  }
+
+  .card{
+    padding:35px 22px;
+  }
+
+  .card h2{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+  <div class="glow"></div>
+
+  <canvas id="particles"></canvas>
+
+  <div class="title">
+    <small>UNA NOCHE ESPECIAL</small>
+    <h1>Para Mari</h1>
+    <p>21 · SIEMPRE 💛</p>
+  </div>
+
+  <!-- FLORES -->
+  <div class="flower f1">🌻</div>
+  <div class="flower f2">🌼</div>
+  <div class="flower f3">🌻</div>
+  <div class="flower f4">🌼</div>
+  <div class="flower f5">🌻</div>
+  <div class="flower f6">🌼</div>
+
+  <!-- CORAZÓN -->
+  <div class="heart">
+    <div class="heart-core"></div>
+  </div>
+
+  <button class="button" onclick="abrirCarta()">
+    ABRIR MI DEDICATORIA
+  </button>
+
+  <!-- CARTA -->
+  <div class="modal" id="modal">
+    <div class="card">
+      <div class="flower-top">🌻</div>
+
+      <h2>Para Mari 💛</h2>
+
+      <p>
+        Hay personas que hacen que un día cualquiera
+        se vuelva especial simplemente por estar presentes.
+        <br><br>
+        Esta pequeña página es un detalle para recordarte
+        lo especial que eres y para guardar un momento bonito
+        en este día 21.
+        <br><br>
+        Espero que estas flores amarillas puedan transmitir
+        un poquito de la alegría que mereces.
+        <br><br>
+        <strong>Con mucho cariño. 🌻✨</strong>
+      </p>
+
+      <button class="close" onclick="cerrarCarta()">Cerrar</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener("resize",resize);
+resize();
+
+class Particle{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height;
+    this.size=Math.random()*2.2+.4;
+    this.speed=Math.random()*.5+.1;
+    this.alpha=Math.random()*.8+.2;
+  }
+
+  update(){
+    this.y-=this.speed;
+
+    if(this.y<0){
+      this.y=canvas.height;
+      this.x=Math.random()*canvas.width;
+    }
+  }
+
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,210,28,${this.alpha})`;
+    ctx.shadowBlur=10;
+    ctx.shadowColor="#ffd21c";
+    ctx.fill();
+  }
+}
+
+for(let i=0;i<180;i++){
+  particles.push(new Particle());
+}
+
+/* PARTÍCULAS */
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p=>{
+    p.update();
+    p.draw();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+/* CARTA */
+function abrirCarta(){
+  document.getElementById("modal").style.display="flex";
+}
+
+function cerrarCarta(){
+  document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html>
