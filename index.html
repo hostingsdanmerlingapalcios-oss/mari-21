@@ -406,20 +406,342 @@ ABRIR MI DEDICATORIA
 
 <div class="garden" id="garden">
 
-<div class="garden-title">
-<h2>Para ti, Mari 🌻</h2>
-<p>Hay algo que quiero decirte...</p>
+<style>
+/* ===== ESPACIO 3D PARA MARI ===== */
+
+#garden.space-scene{
+  position:fixed;
+  inset:0;
+  display:block;
+  overflow:hidden;
+  background:#010108;
+  perspective:900px;
+  touch-action:none;
+  z-index:30;
+}
+
+/* Fondo espacial */
+.space-bg{
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(255,210,30,.38) 0%,
+      rgba(255,180,0,.16) 12%,
+      rgba(30,18,2,.45) 32%,
+      rgba(2,4,15,.9) 62%,
+      #010108 82%);
+  transition:transform 1s ease;
+}
+
+/* Estrellas */
+.stars{
+  position:absolute;
+  inset:-30%;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.95) 1px,transparent 2px),
+    radial-gradient(circle,rgba(255,220,80,.8) 1px,transparent 2px),
+    radial-gradient(circle,rgba(255,255,255,.7) 2px,transparent 3px);
+  background-size:90px 90px,140px 140px,210px 210px;
+  animation:starsMove 35s linear infinite;
+}
+
+@keyframes starsMove{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(-120px,80px,100px) scale(1.15)}
+}
+
+/* Nebulosa amarilla */
+.yellow-space{
+  position:absolute;
+  left:50%;
+  top:52%;
+  width:650px;
+  height:650px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:
+    radial-gradient(circle,
+      rgba(255,235,90,.95) 0%,
+      rgba(255,200,20,.5) 12%,
+      rgba(255,170,0,.22) 28%,
+      rgba(255,150,0,.08) 45%,
+      transparent 70%);
+  filter:blur(8px);
+  animation:spacePulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes spacePulse{
+  from{transform:translate(-50%,-50%) scale(.85);opacity:.65}
+  to{transform:translate(-50%,-50%) scale(1.12);opacity:1}
+}
+
+/* Título */
+.space-title{
+  position:absolute;
+  top:7%;
+  left:0;
+  width:100%;
+  text-align:center;
+  z-index:20;
+  color:#ffe77a;
+  text-shadow:
+    0 0 10px #ffd21c,
+    0 0 30px #ffb900;
+}
+
+.space-title h2{
+  font-size:clamp(32px,6vw,65px);
+  font-weight:normal;
+  margin-bottom:10px;
+}
+
+.space-title p{
+  color:#eee3ae;
+  letter-spacing:4px;
+  font-size:13px;
+}
+
+/* Flores */
+.space-flower{
+  position:absolute;
+  z-index:15;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  font-size:80px;
+  filter:
+    drop-shadow(0 0 8px #ffd21c)
+    drop-shadow(0 0 25px #ffb900);
+  transition:
+    left 1s ease,
+    transform 1s ease,
+    filter .3s;
+  animation:flowerFloat 5s ease-in-out infinite;
+}
+
+.space-flower:hover{
+  filter:
+    drop-shadow(0 0 15px #fff36b)
+    drop-shadow(0 0 45px #ffd21c);
+}
+
+@keyframes flowerFloat{
+  0%,100%{margin-top:0}
+  50%{margin-top:-18px}
+}
+
+/* Diferentes profundidades */
+.flower-near{
+  font-size:105px;
+  z-index:18;
+}
+
+.flower-mid{
+  font-size:75px;
+  z-index:15;
+}
+
+.flower-far{
+  font-size:48px;
+  z-index:12;
+  opacity:.8;
+}
+
+/* Posiciones */
+.sf1{left:8%;top:25%}
+.sf2{left:22%;top:65%}
+.sf3{left:43%;top:40%}
+.sf4{left:68%;top:27%}
+.sf5{left:84%;top:62%}
+.sf6{left:55%;top:72%}
+.sf7{left:3%;top:68%}
+.sf8{left:76%;top:48%}
+
+/* Partículas */
+.space-particle{
+  position:absolute;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#ffd21c;
+  box-shadow:0 0 12px #ffd21c;
+  animation:particleFloat 5s infinite ease-in-out;
+}
+
+@keyframes particleFloat{
+  0%,100%{
+    transform:translate3d(0,0,0);
+    opacity:.3;
+  }
+  50%{
+    transform:translate3d(30px,-50px,80px);
+    opacity:1;
+  }
+}
+
+/* Indicador */
+.swipe-space{
+  position:absolute;
+  bottom:6%;
+  left:0;
+  width:100%;
+  text-align:center;
+  color:#d7bd55;
+  letter-spacing:3px;
+  font-size:11px;
+  z-index:25;
+}
+
+.swipe-space span{
+  display:inline-block;
+  animation:arrowMove 1.5s infinite;
+}
+
+@keyframes arrowMove{
+  0%,100%{transform:translateX(-12px)}
+  50%{transform:translateX(12px)}
+}
+
+/* Movimiento de las flores */
+#garden.move-left .sf1{left:-10%}
+#garden.move-left .sf2{left:5%}
+#garden.move-left .sf3{left:28%}
+#garden.move-left .sf4{left:52%}
+#garden.move-left .sf5{left:70%}
+#garden.move-left .sf6{left:40%}
+#garden.move-left .sf7{left:-15%}
+#garden.move-left .sf8{left:62%}
+
+#garden.move-right .sf1{left:25%}
+#garden.move-right .sf2{left:38%}
+#garden.move-right .sf3{left:58%}
+#garden.move-right .sf4{left:85%}
+#garden.move-right .sf5{left:105%}
+#garden.move-right .sf6{left:72%}
+#garden.move-right .sf7{left:18%}
+#garden.move-right .sf8{left:92%}
+
+/* Celular */
+@media(max-width:600px){
+  .yellow-space{
+    width:430px;
+    height:430px;
+  }
+
+  .space-flower{
+    font-size:60px;
+  }
+
+  .flower-near{
+    font-size:78px;
+  }
+
+  .flower-mid{
+    font-size:58px;
+  }
+
+  .flower-far{
+    font-size:38px;
+  }
+
+  .space-title{
+    top:8%;
+  }
+
+  .space-title h2{
+    font-size:34px;
+  }
+
+  .space-title p{
+    font-size:10px;
+  }
+}
+</style>
+
+<div class="space-bg"></div>
+<div class="stars"></div>
+<div class="yellow-space"></div>
+
+<div class="space-title">
+  <h2>Para ti, Mari 🌻</h2>
+  <p>UN PEQUEÑO UNIVERSO PARA TI</p>
 </div>
 
-<button class="sunflower s1" onclick="abrirCarta()">🌻</button>
-<button class="sunflower s2" onclick="abrirCarta()">🌻</button>
-<button class="sunflower s3" onclick="abrirCarta()">🌻</button>
-<button class="sunflower s4" onclick="abrirCarta()">🌻</button>
-<button class="sunflower s5" onclick="abrirCarta()">🌻</button>
+<!-- FLORES EN EL ESPACIO -->
 
-<div class="hint">
-TOCA UN GIRASOL ✨
+<button class="space-flower flower-near sf1"
+        onclick="abrirCarta()">🌻</button>
+
+<button class="space-flower flower-mid sf2"
+        onclick="abrirCarta()">🌻</button>
+
+<button class="space-flower flower-far sf3"
+        onclick="abrirCarta()">🌻</button>
+
+<button class="space-flower flower-mid sf4"
+        onclick="abrirCarta()">🌻</button>
+
+<button class="space-flower flower-near sf5"
+        onclick="abrirCarta()">🌻</button>
+
+<button class="space-flower flower-mid sf6"
+        onclick="abrirCarta()">🌻</button>
+
+<button class="space-flower flower-far sf7"
+        onclick="abrirCarta()">🌻</button>
+
+<button class="space-flower flower-far sf8"
+        onclick="abrirCarta()">🌻</button>
+
+<!-- PARTÍCULAS -->
+
+<div class="space-particle" style="left:15%;top:20%"></div>
+<div class="space-particle" style="left:30%;top:35%;animation-delay:1s"></div>
+<div class="space-particle" style="left:55%;top:20%;animation-delay:2s"></div>
+<div class="space-particle" style="left:72%;top:38%;animation-delay:1.5s"></div>
+<div class="space-particle" style="left:90%;top:20%;animation-delay:3s"></div>
+<div class="space-particle" style="left:12%;top:55%;animation-delay:2.5s"></div>
+<div class="space-particle" style="left:35%;top:78%;animation-delay:1s"></div>
+<div class="space-particle" style="left:65%;top:82%;animation-delay:3s"></div>
+<div class="space-particle" style="left:92%;top:70%;animation-delay:2s"></div>
+
+<div class="swipe-space">
+  <span>←</span>
+  DESLIZA PARA EXPLORAR
+  <span>→</span>
 </div>
+
+<script>
+/* Movimiento con el dedo o mouse */
+(function(){
+
+  const garden = document.getElementById("garden");
+  let startX = 0;
+
+  garden.addEventListener("touchstart", function(e){
+    startX = e.touches[0].clientX;
+  });
+
+  garden.addEventListener("touchend", function(e){
+
+    const endX = e.changedTouches[0].clientX;
+    const distance = endX - startX;
+
+    if(Math.abs(distance) < 60) return;
+
+    garden.classList.remove("move-left","move-right");
+
+    if(distance < 0){
+      garden.classList.add("move-left");
+    }else{
+      garden.classList.add("move-right");
+    }
+
+  });
+
+})();
+</script>
 
 </div>
 
