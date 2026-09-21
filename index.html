@@ -16,8 +16,8 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
     background:#000;
+    font-family:Georgia,serif;
 }
 
 /* =========================
@@ -27,120 +27,86 @@ html,body{
 #inicio{
     position:fixed;
     inset:0;
-    z-index:10;
+    z-index:20;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    overflow:hidden;
     background:
-        radial-gradient(circle at center,#493300 0%,#160f00 32%,#050505 65%,#000 100%);
-}
-
-#inicio::before{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    border-radius:50%;
-    background:rgba(255,190,0,.12);
-    filter:blur(80px);
-    animation:pulse 4s infinite alternate;
-}
-
-@keyframes pulse{
-    from{transform:scale(.8);opacity:.5}
-    to{transform:scale(1.2);opacity:1}
+        radial-gradient(circle,#4b3500 0%,#171000 35%,#020202 80%);
 }
 
 .portada{
     position:relative;
-    z-index:3;
-    padding:25px;
+    z-index:2;
 }
 
 .portada h1{
+    font-size:clamp(50px,12vw,90px);
     color:#ffd84a;
-    font-size:clamp(45px,12vw,90px);
     text-shadow:
-        0 0 10px #ffcc33,
-        0 0 30px #ffb300,
-        0 0 60px #ff9900;
-    margin-bottom:12px;
+        0 0 10px #ffd000,
+        0 0 30px #ff9d00,
+        0 0 70px #ff7b00;
 }
 
 .portada h2{
-    color:#fff1a6;
-    font-size:clamp(20px,5vw,35px);
+    margin-top:10px;
+    color:#fff0a0;
     letter-spacing:5px;
-    margin-bottom:15px;
 }
 
 .portada p{
-    color:#ffe98a;
-    font-size:16px;
+    margin-top:15px;
+    color:#ffe58a;
     letter-spacing:3px;
-    margin-bottom:35px;
+    font-size:13px;
 }
 
 .corazon{
-    width:90px;
-    height:90px;
-    margin:0 auto 35px;
-    position:relative;
-    transform:rotate(-45deg);
+    width:75px;
+    height:75px;
+    margin:40px auto;
     background:#ffd21c;
-    box-shadow:
-        0 0 20px #ffd21c,
-        0 0 50px #ffae00,
-        0 0 90px #ff8c00;
-    animation:latido 1.5s infinite;
+    transform:rotate(-45deg);
+    box-shadow:0 0 25px #ffbd00,0 0 70px #ff8c00;
+    animation:pulse 1.5s infinite;
 }
 
-.corazon::before,
-.corazon::after{
+.corazon:before,
+.corazon:after{
     content:"";
     position:absolute;
-    width:90px;
-    height:90px;
+    width:75px;
+    height:75px;
     border-radius:50%;
     background:#ffd21c;
 }
 
-.corazon::before{
-    top:-45px;
-    left:0;
+.corazon:before{
+    top:-37px;
 }
 
-.corazon::after{
-    left:45px;
-    top:0;
+.corazon:after{
+    left:37px;
 }
 
-@keyframes latido{
-    0%,100%{transform:rotate(-45deg) scale(1)}
-    50%{transform:rotate(-45deg) scale(1.12)}
+@keyframes pulse{
+    50%{
+        transform:rotate(-45deg) scale(1.12);
+    }
 }
 
 .boton{
-    border:2px solid #ffd84a;
-    background:rgba(255,190,0,.12);
-    color:#ffe98b;
     padding:16px 30px;
     border-radius:40px;
-    font-size:16px;
+    border:2px solid #ffd83d;
+    background:rgba(255,190,0,.12);
+    color:#ffe990;
+    font-size:14px;
     letter-spacing:2px;
     cursor:pointer;
-    box-shadow:
-        0 0 15px rgba(255,210,50,.6),
-        inset 0 0 15px rgba(255,210,50,.15);
-    transition:.3s;
-}
-
-.boton:hover{
-    background:#ffd21c;
-    color:#241800;
-    transform:scale(1.05);
+    box-shadow:0 0 20px #d99d00;
 }
 
 /* =========================
@@ -151,153 +117,147 @@ html,body{
     position:fixed;
     inset:0;
     display:none;
-    z-index:20;
     overflow:hidden;
-    background:#010106;
-    touch-action:none;
+    background:#000;
+    z-index:10;
 }
 
-#spaceCanvas{
+.universo{
+    position:absolute;
+    inset:-5%;
+    background-image:url("universo-mari.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    transform:scale(1.08);
+
+    animation:
+        universoMovimiento 18s ease-in-out infinite alternate,
+        zoomUniverso 24s ease-in-out infinite alternate;
+}
+
+/* Movimiento lento de toda la imagen */
+
+@keyframes universoMovimiento{
+
+    0%{
+        transform:
+            scale(1.08)
+            translate3d(-1%,0,0);
+    }
+
+    50%{
+        transform:
+            scale(1.12)
+            translate3d(1%, -0.7%,0);
+    }
+
+    100%{
+        transform:
+            scale(1.08)
+            translate3d(-.5%,.8%,0);
+    }
+}
+
+@keyframes zoomUniverso{
+
+    0%{
+        filter:brightness(.95);
+    }
+
+    50%{
+        filter:brightness(1.08);
+    }
+
+    100%{
+        filter:brightness(1);
+    }
+}
+
+/* Capa de movimiento */
+
+.movimiento{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 25%,
+            rgba(0,0,0,.05) 65%,
+            rgba(0,0,0,.35) 100%
+        );
+}
+
+/* Partículas adicionales */
+
+#particles{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
-}
-
-/* Nebulosa */
-.nebulosa{
-    position:absolute;
-    width:100%;
-    height:100%;
     pointer-events:none;
-    background:
-        radial-gradient(
-            ellipse at 50% 48%,
-            rgba(255,211,55,.30) 0%,
-            rgba(255,180,0,.20) 13%,
-            rgba(255,120,0,.10) 25%,
-            transparent 48%
-        );
-    filter:blur(10px);
-    mix-blend-mode:screen;
 }
 
 /* Título */
-.titulo-universo{
+
+.titulo{
     position:absolute;
-    top:7%;
+    top:9%;
     left:50%;
     transform:translateX(-50%);
     text-align:center;
-    z-index:30;
-    width:100%;
-    pointer-events:none;
-}
-
-.titulo-universo h2{
-    color:#ffe46b;
-    font-size:clamp(25px,6vw,48px);
+    color:#fff2a2;
+    z-index:5;
     text-shadow:
-        0 0 10px #ffcf31,
-        0 0 25px #ff9d00;
+        0 0 8px #ffcf28,
+        0 0 20px #ff9d00,
+        0 0 40px #ff8000;
 }
 
-.titulo-universo p{
-    margin-top:8px;
-    color:#fff0a0;
+.titulo h2{
+    font-size:clamp(30px,6vw,58px);
+    white-space:nowrap;
+}
+
+.titulo p{
+    margin-top:10px;
     font-size:12px;
-    letter-spacing:4px;
+    letter-spacing:6px;
 }
 
-/* =========================
-   GIRASOLES
-========================= */
+/* Botón */
 
-.flor{
+.abrir{
     position:absolute;
-    z-index:25;
-    font-size:clamp(45px,9vw,90px);
-    filter:
-        drop-shadow(0 0 8px #ffd21c)
-        drop-shadow(0 0 25px #ff9d00);
-    user-select:none;
-    cursor:pointer;
-    animation:flotar 5s ease-in-out infinite;
-}
-
-.flor1{
-    left:7%;
-    top:25%;
-    animation-delay:-1s;
-    transform:scale(.75);
-}
-
-.flor2{
-    right:7%;
-    top:30%;
-    animation-delay:-3s;
-    transform:scale(.65);
-}
-
-.flor3{
-    left:18%;
-    bottom:12%;
-    animation-delay:-2s;
-    transform:scale(.9);
-}
-
-.flor4{
-    right:18%;
-    bottom:14%;
-    animation-delay:-4s;
-    transform:scale(.8);
-}
-
-.flor5{
-    left:48%;
-    top:25%;
-    animation-delay:-2.5s;
-    transform:scale(.5);
-}
-
-@keyframes flotar{
-    0%,100%{
-        margin-top:0;
-        rotate:-3deg;
-    }
-    50%{
-        margin-top:-18px;
-        rotate:4deg;
-    }
-}
-
-/* =========================
-   BOTÓN CARTA
-========================= */
-
-.abrir-carta{
-    position:absolute;
-    bottom:7%;
+    bottom:8%;
     left:50%;
     transform:translateX(-50%);
-    z-index:40;
-    border:2px solid #ffd84a;
-    background:rgba(10,8,0,.65);
-    color:#ffe88a;
-    padding:15px 28px;
-    border-radius:35px;
-    letter-spacing:2px;
-    font-size:14px;
-    box-shadow:
-        0 0 15px #ffb300,
-        inset 0 0 15px rgba(255,210,50,.15);
-    cursor:pointer;
+    z-index:6;
+
+    padding:17px 38px;
+
+    border:2px solid #ffd62f;
+    border-radius:40px;
+
+    background:rgba(20,12,0,.45);
     backdrop-filter:blur(5px);
+
+    color:#fff0a0;
+    letter-spacing:3px;
+    font-size:13px;
+
+    box-shadow:
+        0 0 12px #ffd21c,
+        0 0 30px rgba(255,150,0,.7);
+
+    cursor:pointer;
 }
 
-.abrir-carta:hover{
+.abrir:hover{
     background:#ffd21c;
-    color:#241800;
+    color:#281700;
 }
 
 /* =========================
@@ -307,11 +267,12 @@ html,body{
 #letterArea{
     position:absolute;
     inset:0;
-    z-index:100;
     display:none;
     justify-content:center;
     align-items:center;
-    padding:25px;
+    padding:20px;
+    z-index:50;
+
     background:rgba(0,0,0,.72);
     backdrop-filter:blur(8px);
 }
@@ -320,27 +281,36 @@ html,body{
     width:min(90%,500px);
     max-height:80vh;
     overflow:auto;
+
     padding:35px 25px;
+
     border-radius:20px;
+
+    background:linear-gradient(
+        145deg,
+        #fff5a8,
+        #ffe477,
+        #fff1a0
+    );
+
+    color:#4b3500;
     text-align:center;
-    color:#4a3500;
-    background:
-        linear-gradient(145deg,#fff4a8,#ffe477,#fff1a0);
+
     box-shadow:
         0 0 25px #ffd21c,
-        0 0 70px rgba(255,170,0,.5);
-    animation:aparecer .8s ease;
+        0 0 70px rgba(255,160,0,.6);
+
+    animation:entrada .7s ease;
 }
 
 .carta h2{
-    color:#765000;
     font-size:30px;
     margin-bottom:20px;
 }
 
 .carta p{
-    font-size:17px;
     line-height:1.7;
+    font-size:17px;
 }
 
 .cerrar{
@@ -348,55 +318,44 @@ html,body{
     padding:10px 25px;
     border:0;
     border-radius:25px;
-    background:#765000;
+    background:#624500;
     color:white;
-    cursor:pointer;
 }
 
-@keyframes aparecer{
+@keyframes entrada{
     from{
         opacity:0;
-        transform:scale(.7) translateY(40px);
+        transform:scale(.7);
     }
     to{
         opacity:1;
-        transform:scale(1) translateY(0);
+        transform:scale(1);
     }
 }
 
 /* =========================
-   MÓVIL
+   CELULAR
 ========================= */
 
 @media(max-width:600px){
 
-    .portada h1{
-        font-size:55px;
+    .titulo{
+        top:8%;
     }
 
-    .portada h2{
-        font-size:20px;
+    .titulo h2{
+        font-size:28px;
+    }
+
+    .titulo p{
+        font-size:8px;
         letter-spacing:3px;
     }
 
-    .portada p{
-        font-size:12px;
-    }
-
-    .flor1{
-        left:2%;
-    }
-
-    .flor2{
-        right:2%;
-    }
-
-    .flor3{
-        left:5%;
-    }
-
-    .flor4{
-        right:5%;
+    .abrir{
+        bottom:7%;
+        padding:14px 25px;
+        font-size:11px;
     }
 }
 </style>
@@ -405,10 +364,10 @@ html,body{
 <body>
 
 <!-- =========================
-     PRIMERA PANTALLA
+     PORTADA
 ========================= -->
 
-<section id="inicio">
+<div id="inicio">
 
     <div class="portada">
 
@@ -426,35 +385,35 @@ html,body{
 
     </div>
 
-</section>
+</div>
 
 
 <!-- =========================
-     UNIVERSO
+     SEGUNDA PANTALLA
 ========================= -->
 
-<section id="garden">
+<div id="garden">
 
-    <canvas id="spaceCanvas"></canvas>
+    <!-- ESTA ES LA IMAGEN QUE ENVIASTE -->
 
-    <div class="nebulosa"></div>
+    <div class="universo"></div>
 
-    <div class="titulo-universo">
+    <div class="movimiento"></div>
+
+    <canvas id="particles"></canvas>
+
+    <div class="titulo">
+
         <h2>Para ti, Mari 🌻</h2>
+
         <p>UN PEQUEÑO UNIVERSO PARA TI</p>
+
     </div>
 
-    <!-- GIRASOLES -->
-
-    <div class="flor flor1" onclick="abrirCarta()">🌻</div>
-    <div class="flor flor2" onclick="abrirCarta()">🌻</div>
-    <div class="flor flor3" onclick="abrirCarta()">🌻</div>
-    <div class="flor flor4" onclick="abrirCarta()">🌻</div>
-    <div class="flor flor5" onclick="abrirCarta()">🌻</div>
-
-    <button class="abrir-carta" onclick="abrirCarta()">
-        ABRIR MI DEDICATORIA 💛
+    <button class="abrir" onclick="abrirCarta()">
+        ABRIR MI DEDICATORIA
     </button>
+
 
     <!-- CARTA -->
 
@@ -462,18 +421,21 @@ html,body{
 
         <div class="carta">
 
-            <h2>Para Mari 🌻</h2>
+            <h2>Para ti, Mari 🌻</h2>
 
             <p>
-                Hay personas que llegan a nuestra vida
-                y hacen que todo se sienta un poquito más especial.
+                Hay personas que hacen que nuestro
+                mundo se vuelva un poquito más especial.
                 <br><br>
-                Este pequeño universo es para ti,
-                porque quería crear algo diferente
-                que pudiera guardar un pedacito de lo que siento.
+
+                Por eso quise crear este pequeño universo
+                para ti, lleno de luz, estrellas y girasoles.
                 <br><br>
-                Espero que este detalle te saque una sonrisa. 💛
+
+                Espero que este detalle te saque
+                una sonrisa. 💛
                 <br><br>
+
                 <strong>Feliz 21. 🌻✨</strong>
             </p>
 
@@ -485,14 +447,14 @@ html,body{
 
     </div>
 
-</section>
+</div>
 
 
 <script>
 
-/* =================================
-   CAMBIO DE PANTALLA
-================================= */
+/* =========================
+   ABRIR UNIVERSO
+========================= */
 
 function abrirJardin(){
 
@@ -500,13 +462,13 @@ function abrirJardin(){
 
     document.getElementById("garden").style.display="block";
 
-    iniciarUniverso();
+    iniciarParticulas();
 }
 
 
-/* =================================
+/* =========================
    CARTA
-================================= */
+========================= */
 
 function abrirCarta(){
 
@@ -521,500 +483,109 @@ function cerrarCarta(){
 }
 
 
-/* =================================
-   UNIVERSO ANIMADO
-================================= */
+/* =========================
+   PARTÍCULAS DORADAS
+========================= */
 
-let universoIniciado=false;
+function iniciarParticulas(){
 
-function iniciarUniverso(){
+    const canvas=document.getElementById("particles");
 
-    if(universoIniciado) return;
-
-    universoIniciado=true;
-
-    const canvas=document.getElementById("spaceCanvas");
     const ctx=canvas.getContext("2d");
 
-    let W,H;
+    let w=window.innerWidth;
+    let h=window.innerHeight;
 
-    const estrellas=[];
-    const galaxia=[];
+    function ajustar(){
 
-    let mouseX=0;
-    let mouseY=0;
+        w=window.innerWidth;
+        h=window.innerHeight;
 
-    let objetivoX=0;
-    let objetivoY=0;
-
-    let rotacion=0;
-
-
-    /* -------------------------
-       TAMAÑO DEL CANVAS
-    ------------------------- */
-
-    function resize(){
-
-        const dpr=Math.min(window.devicePixelRatio || 1,1.5);
-
-        W=window.innerWidth;
-        H=window.innerHeight;
-
-        canvas.width=W*dpr;
-        canvas.height=H*dpr;
-
-        canvas.style.width=W+"px";
-        canvas.style.height=H+"px";
-
-        ctx.setTransform(dpr,0,0,dpr,0,0);
+        canvas.width=w;
+        canvas.height=h;
 
     }
 
-    window.addEventListener("resize",resize);
+    ajustar();
 
-    resize();
+    window.addEventListener("resize",ajustar);
 
 
-    /* -------------------------
-       ESTRELLAS
-    ------------------------- */
+    const cantidad=w<600 ? 100 : 180;
 
-    const cantidadEstrellas=
-        W<600 ? 280 : 450;
+    const estrellas=[];
 
-    for(let i=0;i<cantidadEstrellas;i++){
+    for(let i=0;i<cantidad;i++){
 
         estrellas.push({
 
-            x:Math.random()-0.5,
+            x:Math.random()*w,
 
-            y:Math.random()-0.5,
+            y:Math.random()*h,
 
-            z:Math.random(),
+            r:Math.random()*1.7+.3,
 
-            size:Math.random()*2+0.3,
+            velocidad:Math.random()*.3+.05,
 
-            twinkle:Math.random()*Math.PI*2
-
-        });
-
-    }
-
-
-    /* -------------------------
-       GALAXIA
-    ------------------------- */
-
-    const cantidadGalaxia=
-        W<600 ? 650 : 1000;
-
-    for(let i=0;i<cantidadGalaxia;i++){
-
-        const brazo=i%5;
-
-        const radio=Math.pow(Math.random(),.65)*1.15;
-
-        const angulo=
-            radio*7.5+
-            brazo*(Math.PI*2/5)+
-            (Math.random()-.5)*.8;
-
-        galaxia.push({
-
-            radio:radio,
-
-            angulo:angulo,
-
-            z:(Math.random()-.5)*.35,
-
-            brillo:Math.random(),
-
-            tamano:Math.random()*1.8+.4
+            brillo:Math.random()*Math.PI*2
 
         });
 
     }
 
-
-    /* -------------------------
-       ESTRELLAS
-    ------------------------- */
-
-    function dibujarEstrellas(){
-
-        for(const s of estrellas){
-
-            const profundidad=.15+s.z*.85;
-
-            const x=
-                W/2+
-                s.x*W*profundidad+
-                mouseX*(1-s.z)*35;
-
-            const y=
-                H/2+
-                s.y*H*profundidad+
-                mouseY*(1-s.z)*25;
-
-            if(x<-10 || x>W+10 || y<-10 || y>H+10)
-                continue;
-
-            const brillo=
-                .4+
-                Math.sin(performance.now()*.002+s.twinkle)*.35;
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                s.size*brillo,
-                0,
-                Math.PI*2
-            );
-
-            ctx.fillStyle=
-                "rgba(255,230,130,"+
-                brillo+
-                ")";
-
-            ctx.shadowBlur=8;
-
-            ctx.shadowColor="#ffd84a";
-
-            ctx.fill();
-
-        }
-
-        ctx.shadowBlur=0;
-
-    }
-
-
-    /* -------------------------
-       GALAXIA DORADA
-    ------------------------- */
-
-    function dibujarGalaxia(){
-
-        const cx=
-            W/2+
-            mouseX*45;
-
-        const cy=
-            H/2+
-            mouseY*30;
-
-        const escala=
-            Math.min(W,H)*.38;
-
-        rotacion+=0.0018;
-
-
-        /* brillo central */
-
-        const halo=
-            ctx.createRadialGradient(
-                cx,cy,0,
-                cx,cy,escala*.48
-            );
-
-        halo.addColorStop(
-            0,
-            "rgba(255,245,170,.95)"
-        );
-
-        halo.addColorStop(
-            .12,
-            "rgba(255,214,70,.75)"
-        );
-
-        halo.addColorStop(
-            .35,
-            "rgba(255,170,20,.28)"
-        );
-
-        halo.addColorStop(
-            1,
-            "rgba(255,130,0,0)"
-        );
-
-        ctx.fillStyle=halo;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            cx,
-            cy,
-            escala*.48,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-
-        /* partículas */
-
-        for(const p of galaxia){
-
-            const a=
-                p.angulo+
-                rotacion+
-                p.radio*.45;
-
-            const perspectiva=
-                1+
-                p.z*.35;
-
-            const r=
-                p.radio*
-                escala*
-                perspectiva;
-
-            const x=
-                cx+
-                Math.cos(a)*r;
-
-            const y=
-                cy+
-                Math.sin(a)*r*.48;
-
-            const alpha=
-                .15+
-                p.brillo*.75;
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                p.tamano,
-                0,
-                Math.PI*2
-            );
-
-            ctx.fillStyle=
-                "rgba(255,"+
-                Math.floor(175+p.brillo*70)+
-                ",45,"+
-                alpha+
-                ")";
-
-            ctx.shadowBlur=
-                p.brillo>0.7 ? 7 : 2;
-
-            ctx.shadowColor="#ffc928";
-
-            ctx.fill();
-
-        }
-
-        ctx.shadowBlur=0;
-
-
-        /* núcleo */
-
-        const nucleo=
-            ctx.createRadialGradient(
-                cx,cy,0,
-                cx,cy,escala*.12
-            );
-
-        nucleo.addColorStop(
-            0,
-            "rgba(255,255,225,1)"
-        );
-
-        nucleo.addColorStop(
-            .2,
-            "rgba(255,224,100,.95)"
-        );
-
-        nucleo.addColorStop(
-            .6,
-            "rgba(255,165,0,.45)"
-        );
-
-        nucleo.addColorStop(
-            1,
-            "rgba(255,130,0,0)"
-        );
-
-        ctx.fillStyle=nucleo;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            cx,
-            cy,
-            escala*.13,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fill();
-
-    }
-
-
-    /* -------------------------
-       POLVO ESPACIAL
-    ------------------------- */
-
-    function polvo(){
-
-        const cx=W/2+mouseX*30;
-        const cy=H/2+mouseY*20;
-
-        for(let i=0;i<120;i++){
-
-            const a=
-                Math.random()*Math.PI*2;
-
-            const r=
-                (Math.random()*.55+.15)*
-                Math.min(W,H);
-
-            const x=
-                cx+
-                Math.cos(a)*r;
-
-            const y=
-                cy+
-                Math.sin(a)*r*.35;
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                Math.random()*1.5,
-                0,
-                Math.PI*2
-            );
-
-            ctx.fillStyle=
-                "rgba(255,190,50,"+
-                Math.random()*.18+
-                ")";
-
-            ctx.fill();
-
-        }
-
-    }
-
-
-    /* -------------------------
-       ANIMACIÓN
-    ------------------------- */
 
     function animar(){
 
-        ctx.clearRect(0,0,W,H);
+        ctx.clearRect(0,0,w,h);
 
-        /* fondo */
+        for(const estrella of estrellas){
 
-        const fondo=
-            ctx.createRadialGradient(
-                W/2,H/2,0,
-                W/2,H/2,
-                Math.max(W,H)*.75
+            estrella.y-=estrella.velocidad;
+
+            if(estrella.y<0){
+
+                estrella.y=h;
+
+                estrella.x=Math.random()*w;
+
+            }
+
+            estrella.brillo+=.03;
+
+            const alpha=
+                .35+
+                Math.sin(estrella.brillo)*.35;
+
+            ctx.beginPath();
+
+            ctx.arc(
+                estrella.x,
+                estrella.y,
+                estrella.r,
+                0,
+                Math.PI*2
             );
 
-        fondo.addColorStop(
-            0,
-            "#241800"
-        );
+            ctx.fillStyle=
+                "rgba(255,220,80,"+
+                alpha+
+                ")";
 
-        fondo.addColorStop(
-            .35,
-            "#0c0800"
-        );
+            ctx.shadowBlur=10;
 
-        fondo.addColorStop(
-            1,
-            "#000006"
-        );
+            ctx.shadowColor="#ffd21c";
 
-        ctx.fillStyle=fondo;
+            ctx.fill();
 
-        ctx.fillRect(0,0,W,H);
+        }
 
-
-        dibujarEstrellas();
-
-        polvo();
-
-        dibujarGalaxia();
-
-
-        /* movimiento suave */
-
-        mouseX+=(objetivoX-mouseX)*.025;
-
-        mouseY+=(objetivoY-mouseY)*.025;
-
+        ctx.shadowBlur=0;
 
         requestAnimationFrame(animar);
 
     }
 
     animar();
-
-
-    /* =================================
-       MOUSE
-    ================================= */
-
-    window.addEventListener("mousemove",(e)=>{
-
-        objetivoX=
-            (e.clientX/W-.5);
-
-        objetivoY=
-            (e.clientY/H-.5);
-
-    });
-
-
-    /* =================================
-       TOUCH
-    ================================= */
-
-    let touchStartX=0;
-    let touchStartY=0;
-
-    document.getElementById("garden")
-    .addEventListener("touchstart",(e)=>{
-
-        touchStartX=e.touches[0].clientX;
-        touchStartY=e.touches[0].clientY;
-
-    },{passive:true});
-
-
-    document.getElementById("garden")
-    .addEventListener("touchmove",(e)=>{
-
-        const x=e.touches[0].clientX;
-        const y=e.touches[0].clientY;
-
-        objetivoX=(x/W-.5)*1.5;
-        objetivoY=(y/H-.5)*1.5;
-
-    },{passive:true});
-
-
-    document.getElementById("garden")
-    .addEventListener("touchend",(e)=>{
-
-        objetivoX=0;
-        objetivoY=0;
-
-    });
 
 }
 
