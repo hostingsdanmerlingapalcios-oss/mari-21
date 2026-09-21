@@ -6,7 +6,11 @@
 <title>Para Mari 💛</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 html,body{
   width:100%;
@@ -15,902 +19,1352 @@ html,body{
 }
 
 body{
-  background:#030305;
+  background:#020207;
   color:white;
   font-family:Georgia,"Times New Roman",serif;
 }
 
-/* =========================
-   PRIMERA PANTALLA
-========================= */
+/* =====================================================
+   PANTALLA INICIAL
+===================================================== */
 
-.scene{
+#inicio{
   position:relative;
   width:100%;
   height:100vh;
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 50%,#332500 0%,#100d03 25%,#030305 65%);
+    radial-gradient(circle at 50% 50%,
+      #3b2b00 0%,
+      #171100 25%,
+      #050506 65%,
+      #010103 100%);
 }
 
-.glow{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:450px;
-  height:450px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:#ffd21c;
-  opacity:.09;
-  filter:blur(70px);
-  animation:pulse 4s infinite alternate;
-}
-
-@keyframes pulse{
-  from{transform:translate(-50%,-50%) scale(.8);opacity:.06}
-  to{transform:translate(-50%,-50%) scale(1.15);opacity:.13}
-}
-
-#particles{
+#inicioCanvas{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
 }
 
-.title{
+.introGlow{
   position:absolute;
-  top:7%;
+  left:50%;
+  top:50%;
+  width:420px;
+  height:420px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#ffd21c;
+  filter:blur(90px);
+  opacity:.12;
+  animation:introPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes introPulse{
+  from{
+    transform:translate(-50%,-50%) scale(.8);
+    opacity:.06;
+  }
+  to{
+    transform:translate(-50%,-50%) scale(1.2);
+    opacity:.16;
+  }
+}
+
+.introTitle{
+  position:absolute;
+  top:8%;
+  left:0;
   width:100%;
   text-align:center;
   z-index:5;
 }
 
-.title small{
+.introTitle small{
   display:block;
-  color:#d9b62c;
+  color:#d8b82c;
   letter-spacing:5px;
   font-size:12px;
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 
-.title h1{
-  font-size:clamp(40px,8vw,85px);
+.introTitle h1{
+  font-size:clamp(42px,8vw,85px);
   font-weight:normal;
-  color:#fff5bd;
-  text-shadow:0 0 10px #ffd21c,0 0 30px #dcae00,0 0 60px #8d6a00;
+  color:#fff3a8;
+  text-shadow:
+    0 0 10px #ffd21c,
+    0 0 30px #dca900,
+    0 0 70px #8b6800;
 }
 
-.title p{
-  margin-top:10px;
-  color:#d8cfae;
+.introTitle p{
+  margin-top:12px;
+  color:#d9d0aa;
   letter-spacing:4px;
   font-size:13px;
 }
 
-.flower{
-  position:absolute;
-  z-index:4;
-  font-size:70px;
-  filter:drop-shadow(0 0 8px #ffd21c) drop-shadow(0 0 22px #b88b00);
-  animation:float 5s ease-in-out infinite;
-}
-
-.f1{left:5%;bottom:12%}
-.f2{left:14%;top:24%;font-size:48px;animation-delay:1s}
-.f3{right:6%;bottom:10%;animation-delay:1.5s}
-.f4{right:14%;top:23%;font-size:52px;animation-delay:2s}
-.f5{left:27%;bottom:8%;font-size:40px;animation-delay:2.5s}
-.f6{right:27%;bottom:7%;font-size:42px;animation-delay:.8s}
-
-@keyframes float{
-  0%,100%{transform:translateY(0) rotate(-3deg)}
-  50%{transform:translateY(-18px) rotate(4deg)}
-}
+/* Corazón */
 
 .heart{
   position:absolute;
   left:50%;
   top:52%;
-  width:230px;
-  height:210px;
+  width:170px;
+  height:170px;
   transform:translate(-50%,-50%) rotate(-45deg);
-  z-index:3;
-  animation:heartGlow 2.5s infinite alternate;
+  z-index:4;
+  animation:heartBeat 2.4s ease-in-out infinite;
 }
 
 .heart:before,
 .heart:after,
-.heart-core{
-  content:"";
+.heartCenter{
   position:absolute;
-  width:230px;
-  height:230px;
+  content:"";
+  width:170px;
+  height:170px;
   border-radius:50%;
   background:#ffd21c;
-  box-shadow:0 0 15px #ffd21c,0 0 40px #e0a900,0 0 80px #9a7100;
+  box-shadow:
+    0 0 15px #ffd21c,
+    0 0 40px #e5ad00,
+    0 0 80px rgba(255,200,0,.5);
 }
 
-.heart:before{top:-115px;left:0}
-.heart:after{left:115px;top:0}
+.heart:before{
+  top:-85px;
+  left:0;
+}
 
-.heart-core{
+.heart:after{
+  left:85px;
+  top:0;
+}
+
+.heartCenter{
   border-radius:0;
   transform:rotate(45deg);
-  z-index:2;
-  box-shadow:0 0 20px #ffd21c,0 0 55px #dca900;
 }
 
-@keyframes heartGlow{
-  from{filter:brightness(.8)}
-  to{filter:brightness(1.3)}
+@keyframes heartBeat{
+  0%,100%{
+    filter:brightness(.85);
+    transform:translate(-50%,-50%) rotate(-45deg) scale(1);
+  }
+  50%{
+    filter:brightness(1.3);
+    transform:translate(-50%,-50%) rotate(-45deg) scale(1.06);
+  }
 }
 
-.button{
+/* Flores iniciales */
+
+.introFlower{
   position:absolute;
-  z-index:8;
-  bottom:9%;
-  left:50%;
-  transform:translateX(-50%);
-  padding:15px 28px;
-  border:1px solid #d7b52d;
-  border-radius:30px;
-  background:rgba(20,17,5,.75);
-  color:#ffe98a;
-  letter-spacing:3px;
-  font-size:12px;
-  cursor:pointer;
-  transition:.3s;
-  box-shadow:0 0 20px rgba(255,210,28,.12);
+  z-index:5;
+  font-size:65px;
+  filter:
+    drop-shadow(0 0 8px #ffd21c)
+    drop-shadow(0 0 25px #b88600);
+  animation:flowerFloat 5s ease-in-out infinite;
 }
 
-.button:hover{
+.if1{
+  left:5%;
+  bottom:12%;
+}
+
+.if2{
+  left:14%;
+  top:25%;
+  font-size:45px;
+  animation-delay:1s;
+}
+
+.if3{
+  right:6%;
+  bottom:10%;
+}
+
+.if4{
+  right:14%;
+  top:25%;
+  font-size:48px;
+  animation-delay:2s;
+}
+
+.if5{
+  left:28%;
+  bottom:7%;
+  font-size:40px;
+  animation-delay:2.5s;
+}
+
+.if6{
+  right:28%;
+  bottom:7%;
+  font-size:42px;
+  animation-delay:.8s;
+}
+
+@keyframes flowerFloat{
+  0%,100%{
+    transform:translateY(0) rotate(-3deg);
+  }
+  50%{
+    transform:translateY(-18px) rotate(4deg);
+  }
+}
+
+/* Botón */
+
+.mainButton{
+  position:absolute;
+  left:50%;
+  bottom:9%;
+  transform:translateX(-50%);
+  z-index:10;
+
+  padding:16px 30px;
+
+  border:1px solid #e0bd38;
+  border-radius:40px;
+
+  background:rgba(20,16,3,.78);
+  color:#ffe98a;
+
+  font-size:12px;
+  letter-spacing:3px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 15px rgba(255,210,28,.2),
+    inset 0 0 10px rgba(255,210,28,.05);
+
+  transition:.3s;
+}
+
+.mainButton:hover{
   background:#ffd21c;
   color:#171300;
-  box-shadow:0 0 35px #ffd21c;
+  box-shadow:
+    0 0 25px #ffd21c,
+    0 0 60px rgba(255,210,28,.4);
 }
 
-/* =========================
-   SEGUNDA PANTALLA
-========================= */
+/* =====================================================
+   UNIVERSO
+===================================================== */
 
-.garden{
-  position:absolute;
+#garden{
+  position:fixed;
   inset:0;
   z-index:30;
+
   display:none;
+
   overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 45%,#382800 0%,#110d03 35%,#020203 80%);
-  animation:fadeIn .8s ease;
+
+  background:#010107;
+
+  perspective:900px;
 }
 
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
+/* Universo completo */
 
-.garden-title{
+.space{
   position:absolute;
-  top:8%;
+  inset:-12%;
+
+  transform:
+    translate3d(0,0,0)
+    scale(1.08);
+
+  transition:transform .5s ease-out;
+
+  background:
+    radial-gradient(
+      ellipse at 52% 52%,
+      rgba(255,245,150,.95) 0%,
+      rgba(255,210,35,.65) 8%,
+      rgba(255,174,0,.30) 20%,
+      rgba(93,58,0,.25) 38%,
+      rgba(10,8,3,.9) 68%,
+      #010107 100%
+    );
+}
+
+/* Nebulosa */
+
+.nebula{
+  position:absolute;
+  width:900px;
+  height:900px;
+
+  left:50%;
+  top:54%;
+
+  transform:translate(-50%,-50%) rotate(-18deg);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,245,160,.95) 0%,
+      rgba(255,211,30,.8) 8%,
+      rgba(255,175,0,.45) 20%,
+      rgba(255,130,0,.18) 35%,
+      transparent 65%
+    );
+
+  filter:blur(12px);
+
+  animation:
+    galaxyPulse 7s ease-in-out infinite alternate,
+    galaxyRotate 28s linear infinite;
+}
+
+@keyframes galaxyPulse{
+  from{
+    transform:translate(-50%,-50%) rotate(-18deg) scale(.9);
+    opacity:.7;
+  }
+  to{
+    transform:translate(-50%,-50%) rotate(-12deg) scale(1.1);
+    opacity:1;
+  }
+}
+
+@keyframes galaxyRotate{
+  from{
+    rotate:0deg;
+  }
+  to{
+    rotate:360deg;
+  }
+}
+
+/* Galaxia */
+
+.galaxy{
+  position:absolute;
+  width:760px;
+  height:330px;
+
+  left:50%;
+  top:54%;
+
+  transform:
+    translate(-50%,-50%)
+    rotate(-24deg);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      #fffbd0 0%,
+      #ffd92f 7%,
+      #ffb000 17%,
+      rgba(255,150,0,.5) 30%,
+      rgba(255,100,0,.12) 48%,
+      transparent 70%
+    );
+
+  box-shadow:
+    0 0 40px #ffd21c,
+    0 0 100px rgba(255,180,0,.5),
+    0 0 180px rgba(255,140,0,.25);
+
+  animation:
+    galaxyMove 14s ease-in-out infinite alternate,
+    galaxySpin 24s linear infinite;
+}
+
+@keyframes galaxyMove{
+  from{
+    transform:
+      translate(-50%,-50%)
+      rotate(-24deg)
+      scale(.95);
+  }
+
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotate(-18deg)
+      scale(1.08);
+  }
+}
+
+@keyframes galaxySpin{
+  from{
+    filter:brightness(.9);
+  }
+  50%{
+    filter:brightness(1.25);
+  }
+  to{
+    filter:brightness(.9);
+  }
+}
+
+/* Centro de la galaxia */
+
+.galaxyCore{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:120px;
+  height:120px;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      white 0%,
+      #fff8a0 15%,
+      #ffd21c 38%,
+      #ff9d00 65%,
+      transparent 75%
+    );
+
+  box-shadow:
+    0 0 30px white,
+    0 0 70px #ffd21c,
+    0 0 140px #ff9d00;
+
+  animation:corePulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes corePulse{
+  from{
+    transform:translate(-50%,-50%) scale(.85);
+  }
+  to{
+    transform:translate(-50%,-50%) scale(1.15);
+  }
+}
+
+/* Estrellas */
+
+.stars{
+  position:absolute;
+  inset:-20%;
+
+  background-image:
+    radial-gradient(circle,white 1px,transparent 2px),
+    radial-gradient(circle,#ffe56b 1px,transparent 2px),
+    radial-gradient(circle,rgba(255,255,255,.8) 2px,transparent 3px);
+
+  background-size:
+    75px 75px,
+    130px 130px,
+    220px 220px;
+
+  animation:starTravel 25s linear infinite;
+}
+
+@keyframes starTravel{
+  from{
+    transform:translate3d(0,0,0) scale(1);
+  }
+
+  to{
+    transform:translate3d(-180px,100px,0) scale(1.12);
+  }
+}
+
+/* Partículas */
+
+.particle{
+  position:absolute;
+
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:#ffd21c;
+
+  box-shadow:
+    0 0 8px #ffd21c,
+    0 0 18px #ffb000;
+
+  animation:particleMove 5s ease-in-out infinite;
+}
+
+@keyframes particleMove{
+  0%,100%{
+    transform:translate3d(0,0,0) scale(.7);
+    opacity:.3;
+  }
+
+  50%{
+    transform:translate3d(50px,-70px,100px) scale(1.5);
+    opacity:1;
+  }
+}
+
+/* =====================================================
+   TÍTULO DEL UNIVERSO
+===================================================== */
+
+.spaceTitle{
+  position:absolute;
+
+  top:7%;
+  left:0;
+
   width:100%;
+
   text-align:center;
-  color:#ffe98a;
-  z-index:5;
-  text-shadow:0 0 20px #dca900;
+
+  z-index:20;
+
+  pointer-events:none;
+
+  text-shadow:
+    0 0 10px #ffd21c,
+    0 0 30px #ffb000;
 }
 
-.garden-title h2{
-  font-size:clamp(30px,7vw,60px);
+.spaceTitle h2{
+  color:#fff0a0;
+
+  font-size:clamp(35px,7vw,68px);
+
   font-weight:normal;
+
+  margin-bottom:10px;
 }
 
-.garden-title p{
-  margin-top:12px;
-  color:#d7cda9;
-  font-size:14px;
-  letter-spacing:3px;
+.spaceTitle p{
+  color:#eee0a0;
+
+  letter-spacing:5px;
+
+  font-size:12px;
 }
+
+/* =====================================================
+   GIRASOLES
+===================================================== */
 
 .sunflower{
   position:absolute;
+
+  z-index:18;
+
   border:0;
+
   background:none;
-  font-size:clamp(55px,12vw,110px);
+
   cursor:pointer;
-  z-index:8;
-  filter:drop-shadow(0 0 8px #ffd21c) drop-shadow(0 0 25px #a87900);
-  animation:sway 4s ease-in-out infinite;
+
+  font-size:80px;
+
+  filter:
+    drop-shadow(0 0 8px #ffd21c)
+    drop-shadow(0 0 25px #ffad00);
+
+  animation:sunflowerFloat 5s ease-in-out infinite;
+
+  transition:
+    transform .4s,
+    filter .3s;
+}
+
+.sunflower:hover{
+  transform:scale(1.2);
+
+  filter:
+    drop-shadow(0 0 15px #fff36b)
+    drop-shadow(0 0 45px #ffd21c);
+}
+
+.sunflower:active{
+  transform:scale(1.12);
+}
+
+@keyframes sunflowerFloat{
+  0%,100%{
+    translate:0 0;
+    rotate:-3deg;
+  }
+
+  50%{
+    translate:0 -20px;
+    rotate:4deg;
+  }
+}
+
+.s1{
+  left:5%;
+  top:23%;
+  font-size:110px;
+}
+
+.s2{
+  left:23%;
+  top:59%;
+  font-size:75px;
+  animation-delay:1s;
+}
+
+.s3{
+  left:43%;
+  top:38%;
+  font-size:50px;
+  animation-delay:2s;
+}
+
+.s4{
+  right:9%;
+  top:24%;
+  font-size:95px;
+  animation-delay:1.4s;
+}
+
+.s5{
+  right:4%;
+  top:61%;
+  font-size:115px;
+  animation-delay:2.5s;
+}
+
+.s6{
+  left:53%;
+  bottom:7%;
+  font-size:65px;
+  animation-delay:.7s;
+}
+
+.s7{
+  left:-3%;
+  bottom:5%;
+  font-size:120px;
+  opacity:.75;
+  animation-delay:1.8s;
+}
+
+.s8{
+  right:-3%;
+  bottom:4%;
+  font-size:125px;
+  opacity:.75;
+  animation-delay:3s;
+}
+
+/* =====================================================
+   BOTÓN DEL UNIVERSO
+===================================================== */
+
+.dedicationButton{
+  position:absolute;
+
+  left:50%;
+  bottom:7%;
+
+  transform:translateX(-50%);
+
+  z-index:25;
+
+  padding:15px 30px;
+
+  border-radius:35px;
+
+  border:1px solid #ffd21c;
+
+  background:rgba(25,18,3,.7);
+
+  color:#ffe98a;
+
+  letter-spacing:3px;
+
+  font-size:11px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 15px rgba(255,210,28,.35),
+    0 0 40px rgba(255,180,0,.15);
+
   transition:.3s;
 }
 
-.sunflower:hover,
-.sunflower:active{
-  transform:scale(1.2);
-  filter:drop-shadow(0 0 15px #fff000) drop-shadow(0 0 40px #ffd21c);
+.dedicationButton:hover{
+  background:#ffd21c;
+  color:#181200;
+
+  box-shadow:
+    0 0 30px #ffd21c,
+    0 0 70px rgba(255,180,0,.4);
 }
 
-.s1{left:7%;bottom:12%}
-.s2{left:22%;top:30%;font-size:75px;animation-delay:.7s}
-.s3{right:8%;bottom:14%;animation-delay:1.3s}
-.s4{right:22%;top:29%;font-size:75px;animation-delay:2s}
-.s5{left:42%;bottom:10%;font-size:65px;animation-delay:1s}
-
-@keyframes sway{
-  0%,100%{transform:rotate(-5deg) translateY(0)}
-  50%{transform:rotate(5deg) translateY(-12px)}
-}
-
-.hint{
+.spaceHint{
   position:absolute;
-  bottom:5%;
+
+  bottom:2%;
+
   width:100%;
+
   text-align:center;
-  color:#bba85e;
-  font-size:11px;
-  letter-spacing:2px;
+
+  z-index:20;
+
+  color:#cdb55a;
+
+  font-size:9px;
+
+  letter-spacing:3px;
 }
 
-/* =========================
+/* =====================================================
    CARTA
-========================= */
+===================================================== */
 
-.letter-area{
-  position:absolute;
+#letterArea{
+  position:fixed;
+
   inset:0;
-  z-index:50;
+
+  z-index:100;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   background:rgba(0,0,0,.78);
-  backdrop-filter:blur(8px);
-  touch-action:pan-y;
+
+  backdrop-filter:blur(10px);
+
+  padding:20px;
 }
 
 .letter{
-  width:min(570px,88%);
-  min-height:520px;
-  max-height:82vh;
-  overflow:hidden;
-  position:relative;
-  padding:45px 35px;
-  border:1px solid #d6b62d;
-  border-radius:24px;
-  background:
-    radial-gradient(circle at 50% 20%,#382b08,#0b0a05 75%);
-  box-shadow:0 0 30px rgba(255,210,28,.3),
-             0 0 90px rgba(255,210,28,.1);
+  width:min(570px,92%);
+
+  max-height:85vh;
+
+  overflow:auto;
+
+  padding:42px 32px;
+
+  border:1px solid #d8b62c;
+
+  border-radius:25px;
+
   text-align:center;
-  animation:letterIn .7s ease;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      #3a2c08,
+      #0b0a05 75%
+    );
+
+  box-shadow:
+    0 0 30px rgba(255,210,28,.3),
+    0 0 100px rgba(255,180,0,.15);
+
+  animation:letterAppear .7s ease;
 }
 
-@keyframes letterIn{
-  from{opacity:0;transform:translateX(100px) scale(.9)}
-  to{opacity:1;transform:translateX(0) scale(1)}
+@keyframes letterAppear{
+  from{
+    opacity:0;
+    transform:scale(.8) translateY(40px);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
 }
 
-.letter-flower{
+.letterFlower{
   font-size:55px;
-  margin-bottom:15px;
+
+  margin-bottom:12px;
 }
 
 .letter h2{
   color:#ffe47a;
+
   font-size:34px;
+
   font-weight:normal;
+
   margin-bottom:25px;
-  text-shadow:0 0 20px #c99b00;
+
+  text-shadow:
+    0 0 20px #d19e00;
 }
 
 .letter p{
   color:#eee7cf;
+
   line-height:1.8;
+
   font-size:16px;
 }
 
-.close{
+.closeButton{
   margin-top:25px;
-  padding:10px 22px;
-  border:1px solid #8b7529;
+
+  padding:10px 24px;
+
+  border:1px solid #a48832;
+
   border-radius:25px;
+
   background:transparent;
+
   color:#ffe47a;
+
   cursor:pointer;
 }
 
-.swipe{
-  margin-top:15px;
-  color:#a99550;
-  font-size:10px;
-  letter-spacing:2px;
+.closeButton:hover{
+  background:#ffd21c;
+  color:#171300;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =====================================================
+   CELULAR
+===================================================== */
 
 @media(max-width:600px){
 
+  .introTitle{
+    top:8%;
+  }
+
+  .introTitle h1{
+    font-size:48px;
+  }
+
+  .introTitle p{
+    font-size:10px;
+  }
+
   .heart{
-    width:150px;
-    height:140px;
+    width:125px;
+    height:125px;
   }
 
   .heart:before,
   .heart:after,
-  .heart-core{
-    width:150px;
-    height:150px;
+  .heartCenter{
+    width:125px;
+    height:125px;
   }
 
-  .heart:before{top:-75px}
-  .heart:after{left:75px}
+  .heart:before{
+    top:-62px;
+  }
 
-  .flower{font-size:48px}
+  .heart:after{
+    left:62px;
+  }
 
-  .title{top:9%}
+  .introFlower{
+    font-size:45px;
+  }
 
-  .title p{font-size:10px}
+  .if2,
+  .if4{
+    font-size:35px;
+  }
+
+  .spaceTitle{
+    top:8%;
+  }
+
+  .spaceTitle h2{
+    font-size:35px;
+  }
+
+  .spaceTitle p{
+    font-size:9px;
+    letter-spacing:3px;
+  }
+
+  .galaxy{
+    width:600px;
+    height:260px;
+  }
+
+  .nebula{
+    width:650px;
+    height:650px;
+  }
+
+  .s1{
+    left:1%;
+    top:24%;
+    font-size:75px;
+  }
+
+  .s2{
+    left:17%;
+    top:62%;
+    font-size:55px;
+  }
+
+  .s3{
+    left:43%;
+    top:39%;
+    font-size:38px;
+  }
+
+  .s4{
+    right:1%;
+    top:26%;
+    font-size:65px;
+  }
+
+  .s5{
+    right:-2%;
+    top:63%;
+    font-size:78px;
+  }
+
+  .s6{
+    left:48%;
+    bottom:10%;
+    font-size:48px;
+  }
+
+  .s7,
+  .s8{
+    font-size:80px;
+  }
+
+  .dedicationButton{
+    bottom:7%;
+
+    padding:14px 22px;
+
+    font-size:9px;
+
+    white-space:nowrap;
+  }
+
+  .spaceHint{
+    display:none;
+  }
 
   .letter{
-    min-height:470px;
     padding:35px 22px;
   }
 
-  .letter h2{font-size:28px}
+  .letter h2{
+    font-size:28px;
+  }
 
-  .letter p{font-size:14px}
+  .letter p{
+    font-size:14px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
+<!-- =====================================================
      PRIMERA PANTALLA
-========================= -->
+===================================================== -->
 
-<div class="scene" id="inicio">
+<section id="inicio">
 
-<div class="glow"></div>
+  <canvas id="inicioCanvas"></canvas>
 
-<canvas id="particles"></canvas>
+  <div class="introGlow"></div>
 
-<div class="title">
-<small>UNA NOCHE ESPECIAL</small>
-<h1>Para Mari</h1>
-<p>21 · SIEMPRE 💛</p>
+  <div class="introTitle">
+    <small>UNA NOCHE ESPECIAL</small>
+    <h1>Para Mari</h1>
+    <p>21 · SIEMPRE 💛</p>
+  </div>
+
+  <div class="introFlower if1">🌻</div>
+  <div class="introFlower if2">🌼</div>
+  <div class="introFlower if3">🌻</div>
+  <div class="introFlower if4">🌼</div>
+  <div class="introFlower if5">🌻</div>
+  <div class="introFlower if6">🌼</div>
+
+  <div class="heart">
+    <div class="heartCenter"></div>
+  </div>
+
+  <button class="mainButton" id="openUniverse">
+    ABRIR MI DEDICATORIA
+  </button>
+
+</section>
+
+
+<!-- =====================================================
+     UNIVERSO
+===================================================== -->
+
+<section id="garden">
+
+  <div class="space" id="space">
+
+    <div class="stars"></div>
+
+    <div class="nebula"></div>
+
+    <div class="galaxy">
+      <div class="galaxyCore"></div>
+    </div>
+
+    <!-- partículas -->
+
+    <div class="particle" style="left:10%;top:18%;animation-delay:.5s"></div>
+    <div class="particle" style="left:18%;top:40%;animation-delay:1.2s"></div>
+    <div class="particle" style="left:30%;top:20%;animation-delay:2s"></div>
+    <div class="particle" style="left:38%;top:75%;animation-delay:2.8s"></div>
+    <div class="particle" style="left:55%;top:17%;animation-delay:1.5s"></div>
+    <div class="particle" style="left:68%;top:35%;animation-delay:3s"></div>
+    <div class="particle" style="left:80%;top:18%;animation-delay:.8s"></div>
+    <div class="particle" style="left:90%;top:45%;animation-delay:2.3s"></div>
+    <div class="particle" style="left:72%;top:78%;animation-delay:1.8s"></div>
+    <div class="particle" style="left:12%;top:75%;animation-delay:3.2s"></div>
+
+    <!-- título -->
+
+    <div class="spaceTitle">
+      <h2>Para ti, Mari 🌻</h2>
+      <p>UN PEQUEÑO UNIVERSO PARA TI</p>
+    </div>
+
+    <!-- girasoles -->
+
+    <button class="sunflower s1" aria-label="Girasol">🌻</button>
+    <button class="sunflower s2" aria-label="Girasol">🌻</button>
+    <button class="sunflower s3" aria-label="Girasol">🌻</button>
+    <button class="sunflower s4" aria-label="Girasol">🌻</button>
+    <button class="sunflower s5" aria-label="Girasol">🌻</button>
+    <button class="sunflower s6" aria-label="Girasol">🌻</button>
+    <button class="sunflower s7" aria-label="Girasol">🌻</button>
+    <button class="sunflower s8" aria-label="Girasol">🌻</button>
+
+  </div>
+
+  <button class="dedicationButton" id="openLetter">
+    🌻 ABRIR MI DEDICATORIA 🌻
+  </button>
+
+  <div class="spaceHint">
+    MUEVE EL MOUSE O DESLIZA PARA EXPLORAR ✨
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     CARTA
+===================================================== -->
+
+<div id="letterArea">
+
+  <div class="letter">
+
+    <div class="letterFlower">🌻</div>
+
+    <h2>Para Mari 💛</h2>
+
+    <p>
+      Hay personas que hacen que un día cualquiera
+      se vuelva especial simplemente por estar presentes.
+      <br><br>
+
+      Esta pequeña página es un detalle para recordarte
+      lo especial que eres y para guardar un momento bonito
+      en este día 21.
+      <br><br>
+
+      Espero que este pequeño universo lleno de flores
+      amarillas pueda transmitir un poquito de alegría
+      y cariño.
+      <br><br>
+
+      <strong>Con mucho cariño. 🌻✨</strong>
+    </p>
+
+    <button class="closeButton" id="closeLetter">
+      Cerrar
+    </button>
+
+  </div>
+
 </div>
 
-<div class="flower f1">🌻</div>
-<div class="flower f2">🌼</div>
-<div class="flower f3">🌻</div>
-<div class="flower f4">🌼</div>
-<div class="flower f5">🌻</div>
-<div class="flower f6">🌼</div>
-
-<div class="heart">
-<div class="heart-core"></div>
-</div>
-
-<button class="button" onclick="abrirJardin()">
-ABRIR MI DEDICATORIA
-</button>
-
-</div>
-
-<!-- =========================
-     JARDÍN DE GIRASOLES
-========================= -->
-
-<div class="garden space-scene" id="garden">
-
-<style>
-/* ===== ESPACIO 3D PARA MARI ===== */
-
-#garden.space-scene{
-  position:fixed;
-  inset:0;
-  display:block;
-  overflow:hidden;
-  background:#010108;
-  perspective:900px;
-  touch-action:none;
-  z-index:30;
-}
-
-/* Fondo espacial */
-.space-bg{
-  position:absolute;
-  inset:-20%;
-  background:
-    radial-gradient(circle at 50% 50%,
-      rgba(255,210,30,.38) 0%,
-      rgba(255,180,0,.16) 12%,
-      rgba(30,18,2,.45) 32%,
-      rgba(2,4,15,.9) 62%,
-      #010108 82%);
-  transition:transform 1s ease;
-}
-
-/* Estrellas */
-.stars{
-  position:absolute;
-  inset:-30%;
-  background-image:
-    radial-gradient(circle,rgba(255,255,255,.95) 1px,transparent 2px),
-    radial-gradient(circle,rgba(255,220,80,.8) 1px,transparent 2px),
-    radial-gradient(circle,rgba(255,255,255,.7) 2px,transparent 3px);
-  background-size:90px 90px,140px 140px,210px 210px;
-  animation:starsMove 35s linear infinite;
-}
-
-@keyframes starsMove{
-  from{transform:translate3d(0,0,0) scale(1)}
-  to{transform:translate3d(-120px,80px,100px) scale(1.15)}
-}
-
-/* Nebulosa amarilla */
-.yellow-space{
-  position:absolute;
-  left:50%;
-  top:52%;
-  width:650px;
-  height:650px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:
-    radial-gradient(circle,
-      rgba(255,235,90,.95) 0%,
-      rgba(255,200,20,.5) 12%,
-      rgba(255,170,0,.22) 28%,
-      rgba(255,150,0,.08) 45%,
-      transparent 70%);
-  filter:blur(8px);
-  animation:spacePulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes spacePulse{
-  from{transform:translate(-50%,-50%) scale(.85);opacity:.65}
-  to{transform:translate(-50%,-50%) scale(1.12);opacity:1}
-}
-
-/* Título */
-.space-title{
-  position:absolute;
-  top:7%;
-  left:0;
-  width:100%;
-  text-align:center;
-  z-index:20;
-  color:#ffe77a;
-  text-shadow:
-    0 0 10px #ffd21c,
-    0 0 30px #ffb900;
-}
-
-.space-title h2{
-  font-size:clamp(32px,6vw,65px);
-  font-weight:normal;
-  margin-bottom:10px;
-}
-
-.space-title p{
-  color:#eee3ae;
-  letter-spacing:4px;
-  font-size:13px;
-}
-
-/* Flores */
-.space-flower{
-  position:absolute;
-  z-index:15;
-  border:0;
-  background:transparent;
-  cursor:pointer;
-  font-size:80px;
-  filter:
-    drop-shadow(0 0 8px #ffd21c)
-    drop-shadow(0 0 25px #ffb900);
-  transition:
-    left 1s ease,
-    transform 1s ease,
-    filter .3s;
-  animation:flowerFloat 5s ease-in-out infinite;
-}
-
-.space-flower:hover{
-  filter:
-    drop-shadow(0 0 15px #fff36b)
-    drop-shadow(0 0 45px #ffd21c);
-}
-
-@keyframes flowerFloat{
-  0%,100%{margin-top:0}
-  50%{margin-top:-18px}
-}
-
-/* Diferentes profundidades */
-.flower-near{
-  font-size:105px;
-  z-index:18;
-}
-
-.flower-mid{
-  font-size:75px;
-  z-index:15;
-}
-
-.flower-far{
-  font-size:48px;
-  z-index:12;
-  opacity:.8;
-}
-
-/* Posiciones */
-.sf1{left:8%;top:25%}
-.sf2{left:22%;top:65%}
-.sf3{left:43%;top:40%}
-.sf4{left:68%;top:27%}
-.sf5{left:84%;top:62%}
-.sf6{left:55%;top:72%}
-.sf7{left:3%;top:68%}
-.sf8{left:76%;top:48%}
-
-/* Partículas */
-.space-particle{
-  position:absolute;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#ffd21c;
-  box-shadow:0 0 12px #ffd21c;
-  animation:particleFloat 5s infinite ease-in-out;
-}
-
-@keyframes particleFloat{
-  0%,100%{
-    transform:translate3d(0,0,0);
-    opacity:.3;
-  }
-  50%{
-    transform:translate3d(30px,-50px,80px);
-    opacity:1;
-  }
-}
-
-/* Indicador */
-.swipe-space{
-  position:absolute;
-  bottom:6%;
-  left:0;
-  width:100%;
-  text-align:center;
-  color:#d7bd55;
-  letter-spacing:3px;
-  font-size:11px;
-  z-index:25;
-}
-
-.swipe-space span{
-  display:inline-block;
-  animation:arrowMove 1.5s infinite;
-}
-
-@keyframes arrowMove{
-  0%,100%{transform:translateX(-12px)}
-  50%{transform:translateX(12px)}
-}
-
-/* Movimiento de las flores */
-#garden.move-left .sf1{left:-10%}
-#garden.move-left .sf2{left:5%}
-#garden.move-left .sf3{left:28%}
-#garden.move-left .sf4{left:52%}
-#garden.move-left .sf5{left:70%}
-#garden.move-left .sf6{left:40%}
-#garden.move-left .sf7{left:-15%}
-#garden.move-left .sf8{left:62%}
-
-#garden.move-right .sf1{left:25%}
-#garden.move-right .sf2{left:38%}
-#garden.move-right .sf3{left:58%}
-#garden.move-right .sf4{left:85%}
-#garden.move-right .sf5{left:105%}
-#garden.move-right .sf6{left:72%}
-#garden.move-right .sf7{left:18%}
-#garden.move-right .sf8{left:92%}
-
-/* Celular */
-@media(max-width:600px){
-  .yellow-space{
-    width:430px;
-    height:430px;
-  }
-
-  .space-flower{
-    font-size:60px;
-  }
-
-  .flower-near{
-    font-size:78px;
-  }
-
-  .flower-mid{
-    font-size:58px;
-  }
-
-  .flower-far{
-    font-size:38px;
-  }
-
-  .space-title{
-    top:8%;
-  }
-
-  .space-title h2{
-    font-size:34px;
-  }
-
-  .space-title p{
-    font-size:10px;
-  }
-}
-</style>
-
-<div class="space-bg"></div>
-<div class="stars"></div>
-<div class="yellow-space"></div>
-
-<div class="space-title">
-  <h2>Para ti, Mari 🌻</h2>
-  <p>UN PEQUEÑO UNIVERSO PARA TI</p>
-</div>
-
-<!-- FLORES EN EL ESPACIO -->
-
-<button class="space-flower flower-near sf1"
-        onclick="abrirCarta()">🌻</button>
-
-<button class="space-flower flower-mid sf2"
-        onclick="abrirCarta()">🌻</button>
-
-<button class="space-flower flower-far sf3"
-        onclick="abrirCarta()">🌻</button>
-
-<button class="space-flower flower-mid sf4"
-        onclick="abrirCarta()">🌻</button>
-
-<button class="space-flower flower-near sf5"
-        onclick="abrirCarta()">🌻</button>
-
-<button class="space-flower flower-mid sf6"
-        onclick="abrirCarta()">🌻</button>
-
-<button class="space-flower flower-far sf7"
-        onclick="abrirCarta()">🌻</button>
-
-<button class="space-flower flower-far sf8"
-        onclick="abrirCarta()">🌻</button>
-
-<!-- PARTÍCULAS -->
-
-<div class="space-particle" style="left:15%;top:20%"></div>
-<div class="space-particle" style="left:30%;top:35%;animation-delay:1s"></div>
-<div class="space-particle" style="left:55%;top:20%;animation-delay:2s"></div>
-<div class="space-particle" style="left:72%;top:38%;animation-delay:1.5s"></div>
-<div class="space-particle" style="left:90%;top:20%;animation-delay:3s"></div>
-<div class="space-particle" style="left:12%;top:55%;animation-delay:2.5s"></div>
-<div class="space-particle" style="left:35%;top:78%;animation-delay:1s"></div>
-<div class="space-particle" style="left:65%;top:82%;animation-delay:3s"></div>
-<div class="space-particle" style="left:92%;top:70%;animation-delay:2s"></div>
-
-<div class="swipe-space">
-  <span>←</span>
-  DESLIZA PARA EXPLORAR
-  <span>→</span>
-</div>
 
 <script>
-/* Movimiento con el dedo o mouse */
-(function(){
 
-  const garden = document.getElementById("garden");
-  let startX = 0;
+/* =====================================================
+   PARTÍCULAS DE LA PRIMERA PANTALLA
+===================================================== */
 
-  garden.addEventListener("touchstart", function(e){
-    startX = e.touches[0].clientX;
-  });
+const canvas = document.getElementById("inicioCanvas");
+const ctx = canvas.getContext("2d");
 
-  garden.addEventListener("touchend", function(e){
+let introParticles = [];
 
-    const endX = e.changedTouches[0].clientX;
-    const distance = endX - startX;
+function resizeIntroCanvas(){
 
-    if(Math.abs(distance) < 60) return;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-    garden.classList.remove("move-left","move-right");
+}
 
-    if(distance < 0){
-      garden.classList.add("move-left");
-    }else{
-      garden.classList.add("move-right");
+resizeIntroCanvas();
+
+window.addEventListener("resize",resizeIntroCanvas);
+
+class IntroParticle{
+
+  constructor(){
+
+    this.x = Math.random()*canvas.width;
+    this.y = Math.random()*canvas.height;
+
+    this.size = Math.random()*2 + .4;
+
+    this.speed = Math.random()*.5 + .1;
+
+    this.alpha = Math.random()*.8 + .2;
+
+  }
+
+  update(){
+
+    this.y -= this.speed;
+
+    if(this.y < 0){
+
+      this.y = canvas.height;
+      this.x = Math.random()*canvas.width;
+
     }
 
-  });
+  }
 
-})();
-</script>
+  draw(){
 
-</div>
+    ctx.beginPath();
 
-<!-- =========================
-     CARTA
-========================= -->
+    ctx.arc(
+      this.x,
+      this.y,
+      this.size,
+      0,
+      Math.PI*2
+    );
 
-<div class="letter-area" id="letterArea">
+    ctx.fillStyle =
+      `rgba(255,210,28,${this.alpha})`;
 
-<div class="letter" id="letter">
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "#ffd21c";
 
-<div class="letter-flower">🌻</div>
+    ctx.fill();
 
-<h2>Para Mari 💛</h2>
+  }
 
-<p>
-Hay personas que hacen que un día cualquiera
-se vuelva especial simplemente por estar presentes.
-<br><br>
-
-Esta pequeña página es un detalle para recordarte
-lo especial que eres y para guardar un momento bonito
-en este día 21.
-<br><br>
-
-Espero que estas flores amarillas puedan transmitir
-un poquito de la alegría que mereces.
-<br><br>
-
-<strong>Con mucho cariño. 🌻✨</strong>
-</p>
-
-<div class="swipe">
-← DESLIZA LA CARTA →
-</div>
-
-<button class="close" onclick="cerrarCarta()">Cerrar</button>
-
-</div>
-
-</div>
-
-<script>
-
-/* =========================
-   PARTÍCULAS
-========================= */
-
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-
-let particles=[];
-
-function resize(){
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-}
-
-window.addEventListener("resize",resize);
-resize();
-
-class Particle{
-
-constructor(){
-this.x=Math.random()*canvas.width;
-this.y=Math.random()*canvas.height;
-this.size=Math.random()*2.2+.4;
-this.speed=Math.random()*.5+.1;
-this.alpha=Math.random()*.8+.2;
-}
-
-update(){
-this.y-=this.speed;
-
-if(this.y<0){
-this.y=canvas.height;
-this.x=Math.random()*canvas.width;
-}
-}
-
-draw(){
-ctx.beginPath();
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-ctx.fillStyle=`rgba(255,210,28,${this.alpha})`;
-ctx.shadowBlur=10;
-ctx.shadowColor="#ffd21c";
-ctx.fill();
-}
 }
 
 for(let i=0;i<180;i++){
-particles.push(new Particle());
+
+  introParticles.push(
+    new IntroParticle()
+  );
+
 }
 
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
+function animateIntro(){
 
-particles.forEach(p=>{
-p.update();
-p.draw();
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  introParticles.forEach(p=>{
+    p.update();
+    p.draw();
+  });
+
+  requestAnimationFrame(animateIntro);
+
+}
+
+animateIntro();
+
+
+/* =====================================================
+   ABRIR UNIVERSO
+===================================================== */
+
+const inicio =
+  document.getElementById("inicio");
+
+const garden =
+  document.getElementById("garden");
+
+const space =
+  document.getElementById("space");
+
+const openUniverse =
+  document.getElementById("openUniverse");
+
+openUniverse.addEventListener("click",()=>{
+
+  inicio.style.display = "none";
+
+  garden.style.display = "block";
+
 });
 
-requestAnimationFrame(animate);
-}
 
-animate();
+/* =====================================================
+   MOVIMIENTO DEL UNIVERSO CON MOUSE
+===================================================== */
 
-/* =========================
-   CAMBIAR DE ESCENA
-========================= */
+let mouseX = 0;
+let mouseY = 0;
 
-function abrirJardin(){
+window.addEventListener("mousemove",(event)=>{
 
-document.getElementById("garden").style.display="block";
+  if(garden.style.display !== "block"){
+    return;
+  }
 
-}
+  const x =
+    (event.clientX / window.innerWidth - .5);
 
-/* =========================
-   ABRIR CARTA
-========================= */
+  const y =
+    (event.clientY / window.innerHeight - .5);
 
-function abrirCarta(){
+  mouseX = x;
+  mouseY = y;
 
-document.getElementById("letterArea").style.display="flex";
+  space.style.transform =
+    `translate3d(${-x*35}px,${-y*25}px,0) scale(1.08)`;
 
-}
-
-/* =========================
-   CERRAR CARTA
-========================= */
-
-function cerrarCarta(){
-
-document.getElementById("letterArea").style.display="none";
-
-}
-
-/* =========================
-   DESLIZAR CARTA
-========================= */
-
-let startX=0;
-
-const letter=document.getElementById("letter");
-
-letter.addEventListener("touchstart",function(e){
-startX=e.touches[0].clientX;
 });
 
-letter.addEventListener("touchend",function(e){
 
-let endX=e.changedTouches[0].clientX;
-let distance=endX-startX;
+/* =====================================================
+   MOVIMIENTO CON EL DEDO
+===================================================== */
 
-if(Math.abs(distance)>70){
+let touchStartX = 0;
+let touchStartY = 0;
 
-letter.style.animation="none";
+garden.addEventListener("touchstart",(event)=>{
 
-if(distance<0){
-letter.style.transform="translateX(-25px)";
-}else{
-letter.style.transform="translateX(25px)";
-}
+  touchStartX =
+    event.touches[0].clientX;
 
-setTimeout(()=>{
-letter.style.transform="translateX(0)";
-},250);
+  touchStartY =
+    event.touches[0].clientY;
 
-}
+},{passive:true});
+
+
+garden.addEventListener("touchmove",(event)=>{
+
+  const touch =
+    event.touches[0];
+
+  const dx =
+    touch.clientX - touchStartX;
+
+  const dy =
+    touch.clientY - touchStartY;
+
+  space.style.transform =
+    `translate3d(${dx*.18}px,${dy*.12}px,0) scale(1.08)`;
+
+},{passive:true});
+
+
+garden.addEventListener("touchend",()=>{
+
+  space.style.transform =
+    "translate3d(0,0,0) scale(1.08)";
+
+});
+
+
+/* =====================================================
+   CARTA
+===================================================== */
+
+const letterArea =
+  document.getElementById("letterArea");
+
+const openLetter =
+  document.getElementById("openLetter");
+
+const closeLetter =
+  document.getElementById("closeLetter");
+
+
+openLetter.addEventListener("click",()=>{
+
+  letterArea.style.display = "flex";
+
+});
+
+
+closeLetter.addEventListener("click",()=>{
+
+  letterArea.style.display = "none";
+
+});
+
+
+/* Cerrar tocando fuera de la carta */
+
+letterArea.addEventListener("click",(event)=>{
+
+  if(event.target === letterArea){
+
+    letterArea.style.display = "none";
+
+  }
 
 });
 
